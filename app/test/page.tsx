@@ -5,7 +5,7 @@ import { useAnswers } from "@/context/AnswersContext";
 import { questions } from "@/lib/questions";
 import type { Question, Dimension } from "@/lib/questions";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function TestPage() {
     const questionPages: Record<Dimension, Question[]> = {
@@ -18,6 +18,7 @@ export default function TestPage() {
         questionPages[q.dimension].push(q);
     });
 
+    const targetRef = useRef<HTMLDivElement | null>(null);
     const [pageNo, setPageNo] = useState<number>(1);
     const pageKeys: Dimension[] = ["EI", "SN", "TF", "JP"];
     const currentPage = pageKeys[pageNo - 1];
@@ -29,9 +30,13 @@ export default function TestPage() {
         redirect("/result");
     }
 
+    useEffect(() => {
+        targetRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [pageNo]);
+
     return (
-        <div className="my-32 flex flex-col w-full px-64">
-            <div className="flex flex-col justify-center items-center gap-24">      
+        <div className="my-24 flex flex-col w-full px-64">
+            <div ref = {targetRef} className="py-12 scroll-mt-10 flex flex-col justify-center items-center gap-24">      
                 {currentQuestions.map(q => (
                     <QuestionCard
                         key = {q.id} 
@@ -41,9 +46,11 @@ export default function TestPage() {
                     />
                 ))}
             </div>
-            <div className="my-24 flex flex-row justify-between">
+            <div className="mt-12 flex flex-row justify-between">
                 <button
-                    onClick = {()=>setPageNo(pageNo - 1)}
+                    onClick = {()=>{
+                        setPageNo(pageNo - 1)
+                    }}
                     disabled = {pageNo === 1}
                     className = {`${pageNo === 1 
                         ? "text-white"
@@ -61,7 +68,9 @@ export default function TestPage() {
                                 break;
                             }
                         }
-                        if (valid) setPageNo(prev => prev + 1);
+                        if (valid) {
+                            setPageNo(prev => prev + 1);
+                        }
                         else alert("Please answer all questions.")
                     }}
                     disabled={pageNo === 4}
