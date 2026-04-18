@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
           <AnswersProvider>
         <Navigation/>
-        <div className="flex-1 flex items-center justify-center">
+        <div className="h-full flex-1 flex items-center justify-center">
             {children}
         </div>
         <Footer/>
