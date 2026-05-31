@@ -7,9 +7,7 @@ import { type Result } from '@/lib/results';
 
 export default function Result() {
     const { answers } = useAnswers();
-    let mbti = getMBTI(answers);
-    mbti = "INTJ";
-	
+    let mbti = getMBTI(answers)
     const res = mbtiResults[mbti];
 
     const enlistItems = (arr : string[]): string => {
@@ -73,7 +71,7 @@ export default function Result() {
         >
             {res && (
                 <div className="w-full flex flex-col">
-                    <div className="my-36 flex flex-row justify-between">
+                    <div className="my-36 flex flex-col md:flex-row justify-between">
                         <div className="flex flex-col gap-4">
                             <div>
                                 {[...mbti].map(x => (
@@ -82,11 +80,12 @@ export default function Result() {
                                     </span>
                                 ))}
                             </div>
-                            <p className="my-2 text-5xl font-bold">{res.title}</p>
-                            <p className={`text-3xl font-bold ${colorCode[res.category]}`}>{mbti} &nbsp; Personality</p>
-                            <p className="w-[80%] text-lg font-medium">{res.headline}</p>
+                            <p className="my-2 text-3xl md:text-5xl font-bold">{res.title}</p>
+                            <img className="h-64 pr-8 md:hidden" src={`/${res.category}/${mbti}.svg`}/>
+                            <p className={`text-2xl md:text-3xl font-bold ${colorCode[res.category]}`}>{mbti} &nbsp; Personality</p>
+                            <p className="md:w-[80%] md:text-lg font-medium">{res.headline}</p>
                         </div>
-                        <img className="h-64 pr-8" src={`/${res.category}/${mbti}.svg`}/>
+                        <img className="hidden md:block h-64 pr-8" src={`/${res.category}/${mbti}.svg`}/>
                     </div>
                     <div className="flex flex-col">
                         <p className="my-4 text-3xl font-medium">Introduction</p>
@@ -94,37 +93,39 @@ export default function Result() {
                         <div className={`my-4`}>
                             <div>
                                 <div className="my-16 flex flex-col md:flex-row justify-between">
-                                    <div className={`py-8 px-12 border-l-1 border-t-1 ${colorCodeBorder[res.category]}`}>
+                                    <div className={`py-8 px-4 md:px-12 border-l-1 border-t-1 ${colorCodeBorder[res.category]}`}>
                                         <p className="text-2xl font-medium">Your Strengths</p>
                                         <ul>
                                             {res.strengths.map(strength => (
-                                                <li key={strength} className="">{strength}</li>
+                                                <li key={strength} className="my-2">
+                                                  {strength}
+                                                </li>
                                             ))}
                                         </ul>
                                     </div>
-                                    <div className="py-8 px-12">
+                                    <div className="py-8 px-4 md:px-12">
                                         <p className="text-2xl font-medium">Your Weaknesses</p>
                                         <ul>
                                             {res.weaknesses.map(weakness => (
-                                                <li key={weakness} className="">{weakness}</li>
+                                                <li key={weakness} className="my-2">{weakness}</li>
                                             ))}
                                         </ul>
                                     </div>
                                 </div>
                                 <div className="flex flex-col md:flex-row justify-between">
-                                    <div className="py-8 px-12">
+                                    <div className="py-8 px-4 md:px-12">
                                         <p className="text-2xl font-medium">Your Traits</p>
                                         <ul>
                                             {res.traits.map(traits => (
-                                                <li key={traits} className="">{traits}</li>
+                                                <li key={traits} className="my-2">{traits}</li>
                                             ))}
                                         </ul>
                                     </div>
-                                    <div className={`py-8 px-12 border-b-1 border-r-1 ${colorCodeBorder[res.category]}`}>
+                                    <div className={`py-8 px-4 md:px-12 border-b-1 border-r-1 ${colorCodeBorder[res.category]}`}>
                                         <p className="text-2xl font-medium">{mbti} &nbsp; Fictional Characters</p>
                                         <ul>
                                             {res.fictionalCharacters.map(character => (
-                                                <li key={character} className=""><span className="bg-gray-800 w-12 rounded-3xl"></span>{character}</li>
+                                                <li key={character} className="my-2">{character}</li>
                                             ))}
                                         </ul>
                                     </div>

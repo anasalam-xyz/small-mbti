@@ -35,7 +35,7 @@ export default function TestPage() {
     }, [pageNo]);
 
     return (
-        <div className="my-24 flex flex-col w-full px-64">
+        <div className="my-24 flex flex-col md:px-64">
             <div ref = {targetRef} className="py-12 scroll-mt-10 flex flex-col justify-center items-center gap-24">      
                 {currentQuestions.map(q => (
                     <QuestionCard
@@ -46,7 +46,7 @@ export default function TestPage() {
                     />
                 ))}
             </div>
-            <div className="mt-12 flex flex-row justify-between">
+            <div className="mx-4 md:mx-0 mt-12 flex flex-row justify-between">
                 <button
                     onClick = {()=>{
                         setPageNo(pageNo - 1)
