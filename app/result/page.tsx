@@ -7,7 +7,9 @@ import { type Result } from '@/lib/results';
 
 export default function Result() {
     const { answers } = useAnswers();
-    const mbti = getMBTI(answers);
+    let mbti = getMBTI(answers);
+    mbti = "INTJ";
+	
     const res = mbtiResults[mbti];
 
     const enlistItems = (arr : string[]): string => {
@@ -122,7 +124,7 @@ export default function Result() {
                                         <p className="text-2xl font-medium">{mbti} &nbsp; Fictional Characters</p>
                                         <ul>
                                             {res.fictionalCharacters.map(character => (
-                                                <li key={character} className="">{character}</li>
+                                                <li key={character} className=""><span className="bg-gray-800 w-12 rounded-3xl"></span>{character}</li>
                                             ))}
                                         </ul>
                                     </div>

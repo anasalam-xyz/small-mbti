@@ -13,7 +13,6 @@ export interface Question {
   options: [Option, Option];
 }
 
-
 export const questions: Question[] = [
   // ======================
   // E vs I (0–9)
