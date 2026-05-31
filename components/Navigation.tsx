@@ -20,7 +20,7 @@ export default function Navigation() {
             <button 
                 className="h-full flex-grow-1 hover:bg-emerald-700 hover:text-white ease-in-out transition-all duration-400"
             >
-                Info
+                <Link href="/info">Info</Link>
             </button>
             <button 
                 className="h-full flex-grow-1  rounded-r-xl hover:bg-emerald-700 hover:text-white ease-in-out transition-all duration-400"
