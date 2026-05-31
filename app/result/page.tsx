@@ -67,7 +67,7 @@ export default function Result() {
             radial-gradient(circle at bottom right, ${g.bottomRight}, transparent 60%)
             `,
             }}
-            className="h-full w-full pb-24 px-32 flex flex-col"
+            className="h-full w-full pb-24 px-8 md:px-32 flex flex-col"
         >
             {res && (
                 <div className="w-full flex flex-col">
